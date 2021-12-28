@@ -30,7 +30,9 @@
         
         <span class="spacer"></span>
 
-        <button mat-raised-button>
+        <span style="margin-right: 15px;"> {{auth.usuario}} </span>
+
+        <button mat-raised-button (click)="logout()">
             Log-out
         </button>
     </mat-toolbar>
