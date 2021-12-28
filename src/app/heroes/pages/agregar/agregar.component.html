@@ -1,1 +1,76 @@
-<p>agregar works!</p>
+<h1>
+    {{(hero.id)? 'Editar' : 'Nuevo'}} 
+    Héroe 
+    <small *ngIf="hero.superhero.length > 0"> - {{hero.superhero | titlecase}}</small>
+</h1>
+<mat-divider></mat-divider><br>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
+    <div fxFlex="50" fxLayout="column">
+        <div fxLayout="row" fxLayout.sm="column" fxLayoutGap='20px'>
+            <mat-form-field fxFlex='50'>
+                <mat-label>Super Héroe</mat-label>
+                <input matInput type="text" placeholder="Introducir nombre..." autocomplete="off"
+                    [(ngModel)]='hero.superhero' required>
+            </mat-form-field>
+
+            <mat-form-field fxFlex='50'>
+                <mat-label>Alter Ego</mat-label>
+                <input matInput type="text" placeholder="Introducir alter ego..." autocomplete="off"
+                    [(ngModel)]='hero.alter_ego' required>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field>
+            <mat-label>Primera Aparición</mat-label>
+            <input matInput type="text" placeholder="Introducir primera aparición..." autocomplete="off"
+                [(ngModel)]='hero.first_appearance' required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Personajes</mat-label>
+            <input matInput type="text" placeholder="Introducir personajes..." autocomplete="off"
+                [(ngModel)]='hero.characters' required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Creador</mat-label>
+            <mat-select [(ngModel)]='hero.publisher'>
+                <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.desc}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Foto Url</mat-label>
+            <input matInput type="url" placeholder="Introducir url de la foto..." autocomplete="off"
+                [(ngModel)]='hero.alt_img' required>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button color="primary" (click)="guardar()" *ngIf="!hero.id">
+            <mat-icon>save</mat-icon>
+            Crear Héroe
+        </button>
+
+        <div fxLayout *ngIf="hero.id">
+            <button mat-raised-button color="primary" (click)="guardar()" >
+                <mat-icon>edit</mat-icon>
+                Actualizar
+            </button>
+
+            <span class="spacer"></span>
+
+            <button mat-raised-button (click)='borrar()' color="warn">
+                <mat-icon>delete</mat-icon>
+                Borrar
+            </button>
+        </div>
+
+
+
+    </div>
+    <div fxFlex="50">
+        <img [src]="hero | imagen">
+    </div>
+</div>
